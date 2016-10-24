@@ -1,0 +1,82 @@
+<div class="container temp-container">
+	<div class="row">
+		<div class="col-md-3 col-md-offset-1">
+			<div class="container following">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Following</h3>
+						</div>
+						<div class="container sub">
+							<div class="panel-body">
+								<ul class="list-group">
+									<li ng-repeat="list in listFollowingArr" class="list-group-item">
+										<button ng-click="gotoProfile(list.following)" class="btn btn-primary btn-sm listBtn">{{list.following}}</button>										
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container temp-container2">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Followers</h3>
+						</div>
+						<div class="container sub" style="">
+							<div class="panel-body">
+								<ul class="list-group">
+									<li ng-repeat="list in listFollowersArr" class="list-group-item"> <!--ng-repeat-->
+										<button ng-click="gotoProfile(list.followers)" class="btn btn-primary btn-sm listBtn">{{list.followers}}</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div class="col-md-6 col-md-offset-1">
+			<div class="container user">
+				<div class="row">
+					<div class="media">
+					  <a class="pull-left" href="#" style="width: 20%;">
+						<img class="media-object" src="./img/user.png" style="padding: 2%;width: 100%;">
+					  </a>
+					  <div class="media-body" style="padding: 2%;">
+						<h1 class="media-heading" style="margin-bottom: 6%;">{{userName}}</h1>
+						<button ng-show="!isMe && isReady && !isBeingFollowed" ng-click="follow(userId)" class="btn btn-primary btn-sm pull-right">Follow</button>
+						<button ng-show="!isMe && isReady && isBeingFollowed" ng-click="unFollow(userId)" class="btn btn-danger btn-sm pull-right">Unfollow</button>
+						<span class="label label-info">Followers {{listFollowers}}</span>
+						<span class="label label-info">Following {{listFollowing}}</span>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div ng-show="isMe" class="form-group form-horizontal">
+				<form ng-submit="addTweet()">
+				<input class="input-sm  box" id="tweet_input" type="text" required ng-model='msg' placeholder="Your tweet here!">
+					<button type="submit" class="btn btn-primary btn-sm pull-right tweet" id="tweetButton">Tweet</button>
+				   </form >
+			</div>
+			<div class="container" style="max-width: 100%;">
+				<div>
+					<ul class="list-group list-tweet">
+						<li  ng-repeat="tweet in myListArr | orderBy:'curDate':true track by $index">								   
+							<div class="list-group-item" style="width: 100%"> 
+								 <h4 class="list-group-item-heading">
+									<span data-ng-show="bahar">{{tweet.name}}</span>
+									<a data-ng-hide="bahar" ng-click="gotoProfile(tweet.name)" style="cursor:pointer">{{tweet.name}}</a>
+									<span class="time">{{tweet.curDate | relativeTime}}</span>
+								</h4>										
+								<p class="list-group-item-text">{{tweet.tweetMsg}}</p>
+							</div>							   
+						</li>
+					</ul>					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
